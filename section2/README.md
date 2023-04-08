@@ -4,6 +4,8 @@
 - Install the necessary dependencies
     - `pip install -r requirements.txt` or `pip3 install -r requirements.txt`
     - If pip is not installed, run `python -m ensurepip --upgrade` or `python3 -m ensurepip --upgrade`
+        - Or `sudo apt install python3-pip` on Linux
+        - Or download the installation script [here](https://bootstrap.pypa.io/get-pip.py) and run the script `python3 get-pip.py`
 
 - Allow incoming connection in Firewall Settings
     - [MacOS](https://support.apple.com/guide/mac-help/change-firewall-settings-on-mac-mh11783/)
